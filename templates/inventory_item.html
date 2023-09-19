@@ -1,0 +1,86 @@
+{%  extends 'main.html' %}
+{% block content %}
+	<div class="row">
+	<div class="card card-body">
+				<table class="table table-sm">
+					<tr>
+						<th>Inventory #</th>
+						<th>Title</th>
+						<th>Type</th>
+						<th>Status</th>
+						<th>Holder</th>
+						<th>Added by</th>
+					</tr>
+
+						<tr>
+							<td>{{inventory_item.id}}</td>
+							<td>{{inventory_item.title}}</td>
+							<td>{{inventory_item.item_type}}</td>
+							<td>{{inventory_item.status}}</td>
+							<td>{{inventory_item.held_by}}</td>
+							<td>{{inventory_item.added_by}}</td>
+							<td><a class="btn btn-danger" href="{% url 'item_delete' inventory_item.id %}">Delete Item</a></td>
+						</tr>
+				</table>
+
+		</div>
+	</div>
+	<div class="row">
+		<div class="card card-body">
+				<table class="table table-sm">
+					<tr>
+						<th>Registration Key</th>
+						<th>Physical S/N</th>
+						<th>Date Registered</th>
+					</tr>
+
+						<tr>
+							<td>{{inventory_item.registration_key}}</td>
+							<td>{{inventory_item.physical_serial_number}}</td>
+							<td>{{inventory_item.date_registered}}</td>
+						</tr>
+				</table>
+
+		</div>
+	</div>
+	<div class="row">
+		<div class="card card-body">
+				<table class="table table-sm">
+					<tr>
+						<th>Imei # 1</th>
+						<th>Imei # 2</th>
+						<th>Phone # 1</th>
+						<th>Phone # 2</th>
+					</tr>
+
+						<tr>
+							<td>{{inventory_item.imei_1}}</td>
+							<td>{{inventory_item.imei_2}}</td>
+							<td>{{inventory_item.phone_number_1}}</td>
+							<td>{{inventory_item.phone_number_2}}</td>
+						</tr>
+				</table>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-6 card card-body">
+			<table class="table table-sm">
+					<tr>
+						<th>Home id#</th>
+						<th>Installed By</th>
+						<th>Date Installed</th>
+					</tr>
+						{% for install in item_installs %}
+						<tr>
+							<td><a href="{% url 'installation' install.id %}">{{install.home_id}}</a></td>
+							<td>{{install.installed_by}}</td>
+							<td>{{install.installation_date}}</td>
+						</tr>
+						{% endfor %}
+				</table>
+		</div>
+		<div class="col-md-6 card card-body">	
+			<a class = 'btn btn-primary btn-block' href="{% url 'item_update' inventory_item.id %}">Update Item Info</a>
+		</div>
+	</div>
+{% endblock content %}

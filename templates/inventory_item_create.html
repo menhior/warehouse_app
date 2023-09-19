@@ -1,0 +1,71 @@
+{%  extends 'main.html' %}
+{% load static %}
+{% block content %}
+
+
+
+	<form action="" method="POST">
+	{% csrf_token %}
+	<div class="row">
+	<div class="col-md-6">
+		<div class="card card-body">
+
+
+				<p><strong>Item Title</strong></p>
+				{{form.title}}
+					<hr>
+				<p><strong>Type</strong></p>
+				{{form.item_type}}
+					<hr>
+				<p><strong>Status</strong></p>
+				{{form.status}}
+					<hr>	
+				<p><strong>In hands of</strong></p>
+				{{form.held_by}}
+					<hr>
+				<p><strong>Home Id</strong></p>
+				{{form.home_id}}
+					<hr>	
+				<p><strong>Depreciation Status</strong></p>
+				{{form.depreciated_status}}
+					<hr>					
+
+		</div>
+	</div>
+	<div class="col-md-6">
+		<div class="card card-body">
+
+
+				<p><strong>Registration Key</strong></p>
+				{{form.registration_key}}
+					<hr>	
+				<p><strong>Physical Serial Number</strong></p>
+				{{form.physical_serial_number}}
+					<hr>
+				<p><strong>Imei 1</strong></p>
+				{{form.imei_1}}
+					<hr>
+				<p><strong>Imei 2</strong></p>
+				{{form.imei_2}}
+					<hr>
+				<p><strong>Phone number #1</strong></p>
+				{{form.phone_number_1}}
+					<hr>
+				<p><strong>Phone number #1</strong></p>
+				{{form.phone_number_2}}
+					<hr>				
+
+				
+		</div>
+	</div>
+	</div>
+	<br>
+	<br>
+	<div class="text-center">
+		<input class='btn btn-primary'  type="submit" name="Submit">
+	</div>
+	</form>
+
+
+
+{% endblock %}

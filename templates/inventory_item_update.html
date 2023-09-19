@@ -1,0 +1,44 @@
+{%  extends 'main.html' %}
+{% load static %}
+{% block content %}
+
+
+<div class="row">
+	<div class="col-md-6">
+		<div class="card card-body">
+
+			<form action="" method="POST">
+				{% csrf_token %}
+				<p><strong>Title</strong></p>
+				{{form.title}}
+					<hr>
+				<p><strong>Type</strong></p>
+				{{form.item_type}}
+					<hr>
+				<p><strong>Status</strong></p>
+				{{form.status}}
+					<hr>	
+				<p><strong>In hands of</strong></p>
+				{{form.held_by}}
+					<hr>
+				<p><strong>Registration Key</strong></p>
+				{{form.registration_key}}
+					<hr>
+				<p><strong>Home ID</strong></p>
+				{{form.home_id}}
+					<hr>	
+				<p><strong>S/N</strong></p>
+				{{form.physical_serial_number}}
+					<hr>	
+				<p><strong>Depreciation Status</strong></p>
+				{{form.depreciated_status}}
+					<hr>						
+				<input type="submit" name="Submit">
+			</form>
+
+		</div>
+	</div>
+</div>
+
+
+{% endblock %}

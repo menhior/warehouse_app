@@ -1,0 +1,48 @@
+{%  extends 'main.html' %}
+{% load static %}
+{% block content %}
+
+
+<div class="row">
+	<div class="col-md-6">
+		<div class="card card-body">
+
+			<form action="" method="POST">
+				{% csrf_token %}
+				<p><strong>Items Used</strong></p>
+				{{form.items_used}}
+					<hr>
+				<p><strong>Registration Key</strong></p>
+				{{form.reg_key}}
+					<hr>	
+				<p><strong>Home ID</strong></p>
+				{{form.home_id}}
+					<hr>				
+				<input type="submit" name="Submit">
+			</form>
+
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+	var array_of_tech_ids = []
+	{% for item in holder_item_query %}
+		array_of_tech_ids.push("{{item.id}}")
+	{% endfor %}
+	console.log(array_of_tech_ids)
+    var selectobject = document.getElementById("id_items_used");
+	//for (var i=1; i<selectobject.length; i++) {
+	for (var i=0; i<selectobject.length; i++) {
+		console.log(i)
+		//console.log(selectobject.options[i].value)
+	    //if (selectobject.options[i].value == '2')
+	    if (!array_of_tech_ids.includes(selectobject.options[i].value)){
+	    	//console.log(selectobject.options[i].value);
+	        selectobject.remove(i);
+	        i--;
+	    }
+	}
+</script>
+
+{% endblock %}

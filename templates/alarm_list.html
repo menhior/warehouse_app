@@ -1,0 +1,30 @@
+{%  extends 'main.html' %}
+{% block content %}
+<div class="row">
+<div class="card card-body">
+			<table class="table table-sm">
+				<tr>
+					<th>Problem</th>
+					<th>Registration Key</th>
+					<th>S/N</th>
+					<th>Error by</th>
+					<th>Item</th>
+				</tr>
+
+				{% for alarm in alarms %}
+					<tr>
+						<td>{{alarm.where}}</td>
+						<td>{{alarm.reg_key}}</td>
+						<td>{{alarm.ph_serial_number}}</td>
+						<td>{{alarm.error_to}}</td>
+						<td>{{alarm.item_in_use}}</td>
+						<td><a class="btn btn-sm btn-info" href="{% url 'alarm_update' alarm.id %}">Update Alarm Status</a></td>
+					</tr>
+				{% endfor %}
+
+			
+			</table>
+	</div>
+</div>
+
+{% endblock content %}

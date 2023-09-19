@@ -1,0 +1,110 @@
+{%  extends 'main.html' %}
+
+
+{% block content %}
+
+<br>
+
+<div class="row">
+	<div class="col">
+		<div class="col-md">
+			<div class="card text-center text-white  mb-3" id="total-orders">
+			  	<div class="card-header">
+			  		<h5 class="card-title">Items in Warehouse</h5>
+			  	</div>
+			  	<div class="card-body">
+			    	<h3 class="card-title">{{warehouse_count}}</h3>
+			  	</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="col">
+		<div class="col-md">
+			<div class="card text-center text-white  mb-3" id="orders-delivered">
+			  	<div class="card-header">
+			  		<h5 class="card-title">Items given out</h5>
+			  	</div>
+			  	<div class="card-body">
+			    	<h3 class="card-title">{{in_hands_count}}</h3>
+			  	</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="col">
+		<div class="col-md">
+			<div class="card text-center text-white  mb-3" id="orders-pending">
+			  	<div class="card-header">
+			  		<h5 class="card-title">Items Installed</h5>
+			  	</div>
+			  	<div class="card-body">
+			    	<h3 class="card-title">{{installed_count}}</h3>
+			  	</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<br>
+
+<div class="row">
+	<div class="col-md-5">
+		<h5>LAST 5 INSTALLATIONS:</h5>
+		<hr>
+		<div class="card card-body">
+			<a class="btn btn-primary  btn-md btn-block" href="{% url 'tech_installation_create' %}">Create Installation Instance</a>
+			<table class="table table-sm">
+				<tr>
+					<th></th>
+					<th>Installation Number</th>
+					<th>Installed By</th>
+					<th>Installation Date</th>
+				</tr>
+
+				{% for install in install_query %}
+					<tr>
+						<td>{{install.id}}</td>
+						<td>{{install.installed_by}}</td>
+						<td>{{install.installation_date}}</td>
+					</tr>
+				{% endfor %}
+
+			</table>
+			<a class="btn btn-info btn-md btn-block font-weight-bold btn-login" href="{% url 'tech_installation_list' %}">Installations List</a>
+		</div>
+	</div>
+
+	<div class="col-md-7">
+		<h5>ITEM TYPE LIST:</h5>
+		<hr>
+		<div class="card card-body">
+			<table class="table table-sm">
+				<tr>
+					<th>Type</th>
+					<th>Count</th>
+				</tr>
+
+				<tr>
+						<td>Total</td>
+						<td>{{total_inventory_count}}</td>
+				</tr>
+
+				{% for item1, item2, url in full_types_list %}
+
+					<tr>
+						<td>{{item1}}</td>
+						<td>{{item2}}</td>
+						<td><a class="btn btn-sm btn-info" href="{{url}}">View</a></td>
+					</tr>
+				{% endfor %}
+
+			
+			</table>
+			<a class="btn btn-info btn-md btn-block font-weight-bold btn-login" href="{% url 'tech_inventory_list' %}">Inventory List</a>
+		</div>
+	</div>
+
+</div>
+
+{% endblock %}

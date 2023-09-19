@@ -1,0 +1,76 @@
+{%  extends 'main.html' %}
+{% block content %}
+<div class="row">
+	<div class="col">
+		<div class="card card-body">
+			<form method="get">
+				{{InstallationFilter.form}}
+		    <button class="btn btn-primary" type="submit">Search</button>
+		  </form>
+		</div>
+	</div>
+	
+</div>
+<br>
+<div class="row">
+<div class="card card-body">
+			<table class="table table-sm">
+				<tr>
+					<th>Installation #</th>
+					<th>Installed by</th>
+					<th>Items Used</th>
+					<th>Registration Key</th>
+					<th>Home Id</th>
+					<th>Installation Date</th>
+				</tr>
+
+				{% for install in installations %}
+					<tr>
+						<td>{{install.id}}</td>
+						<td>{{install.installed_by}}</td>
+						<td>
+						{% for item in install.items_used.all %}
+						 {{item}} 
+						<br>
+						{% endfor %}
+						</td>
+						<td>{{install.reg_key}}</td>
+						<td>{{install.home_id}}</td>
+						<td>{{install.installation_date}}</td>
+					</tr>
+				{% endfor %}
+
+			
+			</table>
+	</div>
+</div>
+
+	<br>
+	<br>
+	<div class="row" style="display: flex; justify-content: center;">
+		<nav aria-label="Page navigation example">
+	    {% if installations.has_other_pages %}
+		  <ul class="pagination">
+		    {% if installations.has_previous %}
+		      <li class="active page-item"><a class="page-link" href="?page={{ installations.previous_page_number }}">&laquo;</a></li>
+		    {% else %}
+		      <li class="disabled page-item"><span class="page-link">&laquo;</span></li>
+		    {% endif %}
+		    {% for i in installations.paginator.page_range %}
+		      {% if installations.number == i %}
+		        <li class="active page-item"><span class="page-link">{{ i }} <span class="sr-only">(current)</span></span></li>
+		      {% else %}
+		        <li><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+		      {% endif %}
+		    {% endfor %}
+		    {% if installations.has_next %}
+		      <li class="active page-item"><a class="page-link" href="?page={{ installations.next_page_number }}">&raquo;</a></li>
+		    {% else %}
+		      <li class="disabled page-item"><span class="page-link">&raquo;</span></li>
+		    {% endif %}
+		  </ul>
+		{% endif %}
+	    </nav>
+    </div>
+
+{% endblock content %}

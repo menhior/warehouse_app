@@ -1,0 +1,35 @@
+{%  extends 'main.html' %}
+{% load static %}
+{% block content %}
+
+
+<div class="row">
+	<div class="col-md-6">
+		<div class="card card-body">
+
+			<form action="" method="POST">
+				{% csrf_token %}
+				<p><strong>Items Used</strong></p>
+				{{form.items_used}}
+					<hr>
+				<p><strong>Installed By</strong></p>
+				{{form.installed_by}}
+					<hr>
+				<p><strong>Home ID</strong></p>
+				{{form.home_id}}
+					<hr>	
+				<p><strong>Distance Passed(in km)</strong></p>
+				{{form.distance_in_km}}
+					<hr>	
+				<p><strong>Uninstalled Status</strong></p>
+				{{form.uninstalled}}
+					<hr>			
+				<input type="submit" name="Submit">
+			</form>
+
+		</div>
+	</div>
+</div>
+
+
+{% endblock %}

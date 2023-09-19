@@ -1,0 +1,57 @@
+{%  extends 'main.html' %}
+{% load static %}
+{% block content %}
+
+
+<div class="row">
+	<div class="col-md-6">
+		<div class="card card-body">
+
+			<form action="" method="POST">
+				{% csrf_token %}
+				<p><strong>Installed By</strong></p>
+				{{form.installed_by}}
+					<hr>
+				<p><strong>Items Used</strong></p>
+				{{form.items_used}}
+					<hr>
+				<p><strong>Distance Passed(in km)</strong></p>
+				{{form.distance_in_km}}
+					<hr>	
+				<p><strong>Home ID</strong></p>
+				{{form.home_id}}
+					<hr>
+				<p><strong>Uninstallation Status</strong></p>
+				{{form.uninstalled}}
+					<hr>				
+				<input type="submit" name="Submit">
+			</form>
+
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+	var array_of_not_installed_items = []
+	{% for item in items_in_warehouse %}
+		array_of_not_installed_items.push("{{item.id}}")
+	{% endfor %}
+	{% for item in items_on_hands %}
+		array_of_not_installed_items.push("{{item.id}}")
+	{% endfor %}
+	console.log(array_of_not_installed_items)
+    var selectobject = document.getElementById("id_items_used");
+	//for (var i=1; i<selectobject.length; i++) {
+	for (var i=0; i<selectobject.length; i++) {
+		//console.log(selectobject.options[i].value)
+	    //if (selectobject.options[i].value == '2')
+	    if (!array_of_not_installed_items.includes(selectobject.options[i].value)){
+	    	//console.log(selectobject.options[i].value);
+	        selectobject.remove(i);
+	        i--;
+	    }
+	}
+</script>
+
+
+{% endblock %}

@@ -1,0 +1,72 @@
+{%  extends 'main.html' %}
+{% block content %}
+<div class="row">
+	<div class="col">
+		<div class="card card-body">
+			<form method="get">
+				{{InventoryFilter.form}}
+		    <button class="btn btn-primary" type="submit">Search</button>
+		  </form>
+		</div>-
+	</div>
+	
+</div>
+<br>
+<div class="row">
+<div class="card card-body">
+			<table class="table table-sm">
+				<p><b>Number of Items:</b> {{inventory_count}} <a href="{% url 'tester' %}" class="btn btn-secondary"> Export to Excel</a></p>
+
+				<tr>
+					<th>Transfer Date</th>
+					<th>Items given Out</th>
+					<th>Given out to</th>
+					<th>Given out by</th>
+				</tr>
+
+				{% for transfer in transfer_to_hands_query %}
+					<tr>
+						<td>{{transfer.date_of_transfer}}</td>
+						<td>{{transfer.items_used.all.count}}</td>
+						<td>{{transfer.given_to}}</td>
+						<td>{{transfer.given_by}}</td>
+						<td><a class="btn btn-sm btn-primary" href="{% url 'inventory_item' item.id %}">Item Detail</a></td>
+						<td><a class="btn btn-sm btn-info" href="{% url 'item_update' item.id %}">Update Item</a></td>
+
+						<td><a class="btn btn-sm btn-danger" href="{% url 'item_delete' item.id %}">Delete</a></td>
+					</tr>
+				{% endfor %}
+
+			
+			</table>
+	</div>
+</div>
+
+	<br>
+	<br>
+	<div class="row" style="display: flex; justify-content: center;">
+		<nav aria-label="Page navigation example">
+	    {% if inv_items.has_other_pages %}
+		  <ul class="pagination">
+		    {% if inv_items.has_previous %}
+		      <li class="active page-item"><a class="page-link" href="?page={{ inv_items.previous_page_number }}">&laquo;</a></li>
+		    {% else %}
+		      <li class="disabled page-item"><span class="page-link">&laquo;</span></li>
+		    {% endif %}
+		    {% for i in inv_items.paginator.page_range %}
+		      {% if inv_items.number == i %}
+		        <li class="active page-item"><span class="page-link">{{ i }} <span class="sr-only">(current)</span></span></li>
+		      {% else %}
+		        <li><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+		      {% endif %}
+		    {% endfor %}
+		    {% if inv_items.has_next %}
+		      <li class="active page-item"><a class="page-link" href="?page={{ inv_items.next_page_number }}">&raquo;</a></li>
+		    {% else %}
+		      <li class="disabled page-item"><span class="page-link">&raquo;</span></li>
+		    {% endif %}
+		  </ul>
+		{% endif %}
+	    </nav>
+    </div>
+{% endblock content %}

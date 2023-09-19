@@ -1,0 +1,43 @@
+{%  extends 'main.html' %}
+
+{% block content %}
+
+	<br>
+
+<div class="row">
+	<div class="col-md">
+		<div class="card card-body">
+			<h4 style="text-align: center">{{installation}}</h4>
+			<hr>
+			<a class="btn btn-outline-info  btn-sm btn-block" href="{% url 'installation_update' installation.id %}">Update Installation Data</a>
+			<a class="btn btn-outline-danger  btn-sm btn-block" href="{% url 'installation_delete' installation.id %}">Delete Installation</a>
+
+		</div>
+	</div>
+
+	<div class="col-md">
+		<div class="card card-body">
+			<h4 style="text-align: center">Installation Data</h4>
+			<hr>
+			<p><b>Date</b> : {{installation.installation_date}}</p>
+			<p><b>Installed by</b> : {{installation.installed_by}}</p>
+			<p><b>Distance Passed(in km)</b> : {{installation.distance_in_km}}</p>
+			<p><b>Home ID</b> : {{installation.home_id}}</p>
+			<p><b>Uninstalled Status</b> : {{installation.uninstalled}}</p>
+		</div>
+	</div>
+
+	<div class="col-md">
+		<div class="card card-body">
+			<h4 style="text-align: center">Items Used</h4>
+			<hr>
+			{% for item in installation.items_used.all %}
+			<h6 style="text-align: center;padding: 2px"><a href="{% url 'inventory_item' item.id %}">{{ item }}</a></h1>
+			{% endfor %}
+		</div>
+	</div>
+</div>
+
+
+
+{% endblock %}
